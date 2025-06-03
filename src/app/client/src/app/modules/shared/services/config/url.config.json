@@ -256,7 +256,7 @@
     "GEO_EXPLORER": {
       "LOCATION_READ": "org/v1/location/read"
     },
-    "CONTENT_COLLECTION": "application/vnd.ekstep.content-collection",
+    "CONTENT_COLLECTION": "application/vnd.ekstep.ecml-archive",
     "LOCATION_READ": "org/v1/location/read",
     "TELEMETRY": {
       "APISLUG": "service/v1/content/",
