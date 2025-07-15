@@ -2772,7 +2772,14 @@
                     "level": "المستوى",
                     "labelLevelPlaceHolder": "اختر المستوى",
                     "max_score": "الحد الأقصى للنقاط",
-                    "labelMaxScorePlaceHolder": "أدخل الحد الأقصى للنقاط"
+                    "labelMaxScorePlaceHolder": "أدخل الحد الأقصى للنقاط",
+                    "genieControls": "إظهار التحكم في اللاعب",
+                    "genieControlsPlaceholder": "تبديل ضوابط جيني",
+                    "instructions": "تعليمات المعلم",
+                    "instructionsPlaceholder": "تعليماتحامل الموقع",
+                    "color": "لون الخلفية",
+                    "colorPlaceholder": "الشريحة الخلفية اللون",
+                    "savingContentPleaseWait": "حفظ المحتوى يرجى الانتظار..."
                     },
                 "assetBrowser": {
                     "selectImage": "اختر صورة",

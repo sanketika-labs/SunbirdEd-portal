@@ -2762,7 +2762,14 @@
                     "level": "Level",
                     "labelLevelPlaceHolder": "Select Level",
                     "max_score": "Maximum Score",
-                    "labelMaxScorePlaceHolder": "Enter Maximum Score"
+                    "labelMaxScorePlaceHolder": "Enter Maximum Score",
+                    "genieControls": "Show Player Control",
+                    "genieControlsPlaceholder": "Toggle genie controls",
+                    "instructions": "Teacher Instructions",
+                    "instructionsPlaceholder": "Teacher Instructions",
+                    "color": "Background color",
+                    "colorPlaceholder": "Slide Background color",
+                    "savingContentPleaseWait": "Saving content please wait..."
                 },
                 "assetBrowser": {
                     "selectImage": "Select Image",
