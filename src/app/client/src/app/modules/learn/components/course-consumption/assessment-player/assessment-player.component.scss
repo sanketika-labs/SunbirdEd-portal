@@ -129,7 +129,7 @@
   }
 }
 
-[dir="rtl"] .textbook__title {
+::ng-deep [dir="rtl"] .textbook__title {
   text-align: right !important;
 }
 
