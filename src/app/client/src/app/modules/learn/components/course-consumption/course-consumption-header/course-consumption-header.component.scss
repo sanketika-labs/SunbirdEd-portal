@@ -39,14 +39,16 @@
 
     .textbook__title {
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
   }
 
   &__addbtn {
     white-space: nowrap;
   }
+}
+
+[dir="rtl"] .textbook__title {
+  text-align: right !important;
 }
 
 @include respond-below(sm) {
