@@ -301,6 +301,26 @@ const routes: Routes = [
           }, roles: 'skillmapReviewerRole',
           breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
         }
+      },
+      {
+        path: 'competency-framework/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-skillmap', subtype: 'paginate', uri: 'workspace/content/competency-framework',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'competencyFrameworkRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
+      },
+      {
+        path: 'competency-framework-reviewer/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-competency-framework-reviewer', subtype: 'paginate', uri: 'workspace/content/competency-framework-reviewer',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'competencyFrameworkReviewerRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
       }
     ]
   },

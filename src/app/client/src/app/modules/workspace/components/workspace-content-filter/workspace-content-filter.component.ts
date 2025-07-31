@@ -128,6 +128,10 @@ export class WorkspaceContentFilterComponent implements OnInit, OnDestroy {
       this.setTelemetryPageId();
   }
 
+  ngOnDestroy(): void {
+  // Add any cleanup logic here if needed
+}
+
   setTelemetryPageId() {
     let pageId = 'all-my-content-page'; // default
     

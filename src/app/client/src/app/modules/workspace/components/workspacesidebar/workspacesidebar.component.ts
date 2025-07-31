@@ -99,6 +99,8 @@ export class WorkspacesidebarComponent implements OnInit {
   * roles for which skillmap reviewer to be shown
   */
  skillmapReviewerRole: Array<string>;
+ competencyFrameworkRole: Array<string>;
+ competencyFrameworkReviewerRole: Array<string>;
    /**
    * reference of Router.
    */
@@ -137,6 +139,8 @@ export class WorkspacesidebarComponent implements OnInit {
     this.collaboratingRole = this.config.rolesConfig.workSpaceRole.collaboratingRole;
     this.skillmapRole = this.config.rolesConfig.workSpaceRole.skillmapRole;
     this.skillmapReviewerRole = this.config.rolesConfig.workSpaceRole.skillmapReviewerRole;
+    this.competencyFrameworkRole = this.config.rolesConfig.workSpaceRole.competencyFrameworkRole;
+    this.competencyFrameworkReviewerRole = this.config.rolesConfig.workSpaceRole.competencyFrameworkReviewerRole;
   }
 
   setInteractData(id) {

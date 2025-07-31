@@ -32,7 +32,9 @@
        "collaboratingRole": ["CONTENT_CREATOR","CONTENT_CREATION","CONTENT_REVIEWER","CONTENT_REVIEW","BOOK_CREATOR"],
        "alltextbookRole": ["ORG_ADMIN"],
        "skillmapRole": ["CONTENT_CREATOR"],
-       "skillmapReviewerRole": ["CONTENT_REVIEWER"]
+       "skillmapReviewerRole": ["CONTENT_REVIEWER"],
+       "competencyFrameworkRole": ["CONTENT_CREATOR"],
+       "competencyFrameworkReviewerRole": ["CONTENT_REVIEWER"]
     },
     "organizationRole":{
 
@@ -64,7 +66,9 @@
        "uciAdmin": ["ORG_ADMIN"],
        "programDashboardRole":["PROGRAM_MANAGER","PROGRAM_DESIGNER"],
        "skillmapRole": ["CONTENT_CREATOR"],
-       "skillmapReviewerRole": ["CONTENT_REVIEWER"]
+       "skillmapReviewerRole": ["CONTENT_REVIEWER"],
+       "competencyFrameworkRole": ["CONTENT_CREATOR"],
+       "competencyFrameworkReviewerRole": ["CONTENT_REVIEWER"]
     }
     ,"WORKSPACEAUTHGARDROLES":[
     {
@@ -121,6 +125,14 @@
     {
         "roles":["CONTENT_REVIEWER"],
         "roleName":"skillmapReviewerRole","url":"workspace/content/skillmap-reviewer","tab":"Skill Map Reviewer"
+    },
+    {
+        "roles":["CONTENT_CREATOR"],
+        "roleName":"competencyFrameworkRole","url":"workspace/content/competency-framework","tab":"Competency Framework"
+    },
+    {
+        "roles":["CONTENT_REVIEWER"],
+        "roleName":"competencyFrameworkReviewerRole","url":"workspace/content/competency-framework-reviewer","tab":"Competency Framework Reviewer"
     }
    ]
 

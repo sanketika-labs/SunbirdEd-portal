@@ -89,4 +89,17 @@
     matTooltip="{{resourceService?.frmelmnts?.lbl?.view_skill_map_review || 'View Skill Map Review' }}" [matTooltipPosition]="'right'">
     {{resourceService?.frmelmnts?.lbl?.skillMapReview || 'Skill Map Review' }}
   </a>
+
+  <a appTelemetryInteract [telemetryInteractEdata]="setInteractData('competency-framework')" *ngIf='permissionService.permissionAvailable' 
+    [class.active]="router.isActive('/workspace/content/competency-framework',false)" 
+    appPermission [permission]='competencyFrameworkRole' class="item" [routerLink]="['competency-framework',1]"
+    matTooltip="{{resourceService?.frmelmnts?.lbl?.view_competency_framework || 'View Competency Framework' }}" [matTooltipPosition]="'right'">
+    {{resourceService?.frmelmnts?.lbl?.competencyFramework || 'Competency Framework' }}
+  </a> 
+  <a appTelemetryInteract [telemetryInteractEdata]="setInteractData('competency-framework-reviewer-button')" *ngIf='permissionService.permissionAvailable' 
+    [class.active]="router.isActive('/workspace/content/competency-framework-reviewer',false)" 
+    appPermission [permission]='competencyFrameworkReviewerRole' class="item" [routerLink]="['competency-framework-reviewer',1]"
+    matTooltip="{{resourceService?.frmelmnts?.lbl?.view_competency_framework_review || 'View Competency Framework Review' }}" [matTooltipPosition]="'right'">
+    {{resourceService?.frmelmnts?.lbl?.competencyFrameworkReview || 'Competency Framework Review' }}
+  </a>
 </div>
