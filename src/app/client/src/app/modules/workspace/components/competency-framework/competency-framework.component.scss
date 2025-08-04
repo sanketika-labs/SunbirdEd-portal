@@ -1,0 +1,146 @@
+@use "@project-sunbird/sb-styles/assets/mixins/mixins" as *;
+
+/* Replicated from skill-map.component.scss, update as needed for competency framework */
+.competency-framework-container {
+  padding: 24px;
+
+  .competency-framework-header {
+    color: var(--primary-400);
+    font-weight: bold;
+  }
+
+  .competency-indicator {
+    border-left: 3px solid var(--secondary-400);
+    padding-left: calculateRem(8px);
+
+    // RTL support
+    html[dir="rtl"] & {
+      border-left: none;
+      border-right: 3px solid var(--secondary-400);
+      padding-left: 0;
+      padding-right: calculateRem(8px);
+    }
+  }
+}
+
+.loader {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.no-result {
+  color: #888;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.framework-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fafafa;
+}
+
+.framework-item h3 {
+  margin: 0 0 8px 0;
+}
+
+.framework-item button {
+  margin-right: 8px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.pagination button {
+  margin: 0 8px;
+}
+
+.sb-gray-loader {
+  &:after {
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0.125rem solid;
+    border-color: var(--gray-100) var(--gray-100) transparent;
+    -webkit-animation: loader 0.5s infinite;
+    animation: loader 0.5s infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.sb-table-blue-strip {
+  background: none;
+  border: none;
+  border-bottom: solid calculateRem(1px) var(--primary-400);
+
+  th {
+    background: none;
+    color: var(--primary-400);
+    border-bottom: solid calculateRem(1px) var(--primary-400);
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background: var(--primary-100);
+    }
+
+    tr:nth-child(even) {
+      background: var(--white);
+    }
+
+    tr {
+      td:first-child {
+        border-left: solid calculateRem(1px) var(--primary-400);
+      }
+
+      td:last-child {
+        border-right: solid calculateRem(1px) var(--primary-400);
+      }
+    }
+  }
+}
+
+.bt-0 {
+  border-top: none;
+}
+
+// RTL support for competency framework table and pagination
+html[dir="rtl"] {
+  .upForReviewTable {
+    th,
+    td {
+      text-align: right;
+
+      &:first-child {
+        text-align: right;
+      }
+
+      &:last-child {
+        text-align: left;
+      }
+    }
+  }
+
+  .ui.pagination.menu {
+    .item {
+      direction: rtl;
+    }
+  }
+}

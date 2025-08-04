@@ -163,6 +163,22 @@ export class WorkSpaceService {
     }
   }
 
+  /**
+   * skillMapEditor
+   * Navigate to skill map editor
+   * @param {Object}  content - content
+   * @param {string}  state - Present state
+  */
+  openSkillMapEditor(content, state) {
+    const contentId = content ? content.identifier : 'new';
+    this.route.navigate(['/workspace/content/skillmap/edit', contentId]);
+  }
+
+  openCompetencyFrameworkEditor(content, state) {
+    const contentId = content ? content.identifier : 'new';
+    this.route.navigate(['/workspace/content/competency-framework/edit', contentId]);
+  }
+
   getDataForCard(data, staticData, dynamicFields, metaData) {
     const list: Array<ICard> = [];
     _.forEach(data, (item, key) => {

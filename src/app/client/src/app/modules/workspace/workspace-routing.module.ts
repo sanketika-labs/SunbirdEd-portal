@@ -7,8 +7,9 @@ import {
   BatchListComponent, BatchPageSectionComponent, UpdateBatchComponent,
   UpforreviewContentplayerComponent, ReviewsubmissionsContentplayerComponent,
   FlagConentplayerComponent, PublishedPopupComponent, RequestChangesPopupComponent, LimitedPublishedComponent,
-  AllContentComponent, FlagReviewerComponent, CollaboratingOnComponent, AllTextbooksComponent, NewCollectionEditorComponent } from './components';
+  AllContentComponent, FlagReviewerComponent, CollaboratingOnComponent, AllTextbooksComponent, NewCollectionEditorComponent, SkillMapComponent, SkillMapEditorComponent } from './components';
 import { AuthGuard } from '../core/guard/auth-gard.service';
+import { CompetencyFrameworkEditorComponent } from './components/competency-framework-editor/competency-framework-editor.component';
 const telemetryEnv = 'workspace';
 const objectType = 'workspace';
 const routes: Routes = [
@@ -281,8 +282,70 @@ const routes: Routes = [
           }, roles: 'collaboratingRole',
           breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
         }
+      },
+      {
+        path: 'skillmap/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-skillmap', subtype: 'paginate', uri: 'workspace/content/skillmap',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'skillmapRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
+      },
+      {
+        path: 'skillmap-reviewer/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-skillmap-reviewer', subtype: 'paginate', uri: 'workspace/content/skillmap-reviewer',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'skillmapReviewerRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
+      },
+      {
+        path: 'competency-framework/:pageNumber', component: SkillMapComponent, 
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-skillmap', subtype: 'paginate', uri: 'workspace/content/competency-framework',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'competencyFrameworkRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
+      },
+      {
+        path: 'competency-framework-reviewer/:pageNumber', component: SkillMapComponent,
+        data: {
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-content-competency-framework-reviewer', subtype: 'paginate', uri: 'workspace/content/competency-framework-reviewer',
+            type: 'list', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, roles: 'competencyFrameworkReviewerRole',
+          breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+        }
       }
     ]
+  },
+  {
+    path: 'content/skillmap/edit/:contentId', component: SkillMapEditorComponent, canActivate: [AuthGuard],
+    data: {
+      telemetry: {
+        env: telemetryEnv, pageid: 'workspace-content-skillmap-editor', uri: 'workspace/content/skillmap/edit',
+        type: 'edit', mode: 'create', object: { type: objectType, ver: '1.0' }
+      }, roles: 'competencyFrameworkRole',
+      breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '/workspace/content/skillmap/1' }, { label: 'Skill Map Editor', url: '' }],
+      hideHeaderNFooter: true
+    }
+  },
+  {
+    path: 'content/competency-framework/edit/:contentId', component: CompetencyFrameworkEditorComponent,
+    data: {
+      telemetry: {
+        env: telemetryEnv, pageid: 'workspace-content-competency-framework-editor', uri: 'workspace/content/competency-framework/edit',
+        type: 'edit', mode: 'create', object: { type: objectType, ver: '1.0' }
+      }, roles: 'skillmapRole',
+      breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '/workspace/content/competency-framework/1' }, { label: 'Competency Framework Editor', url: '' }],
+      hideHeaderNFooter: true
+    }
   },
   {
     path: 'edit/:type/:contentId/:state/:contentStatus', component: NewCollectionEditorComponent, canActivate: [AuthGuard],

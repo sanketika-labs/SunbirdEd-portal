@@ -1,0 +1,188 @@
+<div class="framework-editor" *ngIf="!isLoading">
+    <!-- Blue Header -->
+    <div class="sb-bg-color-primary">
+        <div class="ui container py-15">
+            <div class="d-flex flex-ai-center sb-color-white">
+                <button style="margin: 0 1rem;" class="sb-btn sb-btn-primary sb-btn-xs back-btn px-0 hover-none fs-0-92 font-weight-bold"
+                    (click)="goBack()" aria-label="back">
+                    <i class="arrow left icon" aria-hidden="true"></i> {{resourceService?.frmelmnts?.btn?.back}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Header -->
+    <div class="sb-bg-lightBlue bb-1">
+        <div class="d-flex flex-jc-space-between flex-ai-center py-20 ui container">
+            <div>
+                <div class="practical-header__title font-weight-bold pl-20 fs-0-92" tabindex="0">
+                    {{ competencyFrameworkName }}
+                </div>
+            </div>
+            <div class="d-flex flex-ai-center">
+                <button class="sb-btn sb-btn-normal sb-btn-outline-primary mr-10" (click)="previewCompetencyFramework()">
+                    <i class="icon eye" aria-hidden="true"></i>
+                    Submit for Review
+                </button>
+                <button class="sb-btn sb-btn-normal sb-btn-outline-primary mr-10" 
+                        [disabled]="!canSaveAsDraft"
+                        [ngClass]="{'sb-disabled': !canSaveAsDraft}"
+                        (click)="saveDraft()">
+                    <i class="icon save" aria-hidden="true"></i>
+                    {{resourceService?.frmelmnts?.lbl?.saveAsDraftBtn}}
+                </button>
+                <!-- <button class="sb-btn sb-btn-normal sb-btn-primary mr-10" (click)="publishCompetencyFramework()">
+                    <i class="icon upload" aria-hidden="true"></i>
+                    Publish
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area with Collection Editor Layout -->
+    <div class="h-100vh sb-bg-white">
+        <div class="ui">
+            <div class="ui twelve column grid m-0">
+                <!-- Tree Navigation Panel -->
+                <div class="three wide column p-0 overflow-y mb-10 h-100vh mt-10">
+                    <div class="framework-tree-container sb-collectionTree-fancyTree sb-collectionTree-fancyTreelist sb-questionset-scroll">
+                        <!-- Dynamic Skill Map Tree Component -->
+                        <app-competency-framework-tree
+                            [competencyFrameworkData]="competencyFrameworkData"
+                            [labelConfig]="labelConfig"
+                            (treeEventEmitter)="onTreeEvent($event)">
+                        </app-competency-framework-tree>
+                    </div>
+                </div>
+
+                <!-- Right Form Panel (similar to meta-form) -->
+                <div class="eight wide column bg-white pl-40 mb-10 w-73">
+                    <!-- Meta Form for Node Details - Always Visible -->
+                    <div class="framework-meta-form">       
+                        <!-- Angular Material Form -->
+                        <form class="framework-form" style="font-family: 'Times New Roman', sans-serif !important;" aria-label="Competency Framework Editor Form">
+                            <!-- Root Node Only Fields -->
+                            <div *ngIf="nodeLevel === 1">
+                              <!-- Title Input -->
+                              <div style="margin-bottom: 16px;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                  <mat-label style="color: black;">Title</mat-label>
+                                  <input matInput [formControl]="nameFormControl" placeholder="Enter title" aria-label="Title" style="font-family: 'Times New Roman', sans-serif !important;">
+                                </mat-form-field>
+                              </div>
+                              <!-- Sector and Enrolment Type Row -->
+                              <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <!-- Sector Select -->
+                                <mat-form-field appearance="outline" style="flex: 1;">
+                                  <mat-label style="color: black;">Sector</mat-label>
+                                  <mat-select [formControl]="sectorFormControl" aria-label="Sector">
+                                    <mat-option value="preschool">Preschool</mat-option>
+                                    <mat-option value="primary">Primary</mat-option>
+                                    <mat-option value="secondary">Secondary</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                                <!-- Enrolment Type Select -->
+                                <mat-form-field appearance="outline" style="flex: 1;">
+                                  <mat-label style="color: black;">Enrolment Type</mat-label>
+                                  <mat-select [formControl]="enrolmentTypeFormControl" aria-label="Enrolment Type">
+                                    <mat-option value="byUser">By user</mat-option>
+                                    <mat-option value="byAdmin">By admin</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <!-- Profile Fields Select -->
+                              <!-- <div style="margin-bottom: 16px;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                  <mat-label style="color: black;">Profile Fields</mat-label>
+                                  <mat-select [formControl]="profileFieldsFormControl" multiple aria-label="Profile Fields">
+                                    <mat-option value="field1">Field 1</mat-option>
+                                    <mat-option value="field2">Field 2</mat-option>
+                                    <mat-option value="field3">Field 3</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div> -->
+                            </div>
+
+                            <!-- Node Level 2 Fields -->
+                            <div *ngIf="nodeLevel === 2">
+                              <!-- Row 1: Title, Order -->
+                              <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <div style="flex: 1; display: flex; flex-direction: column;">
+                                  <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label style="color: black;">Title</mat-label>
+                                    <input matInput [formControl]="node2TitleFormControl" placeholder="Enter title" aria-label="Title" required>
+                                    <mat-error *ngIf="node2TitleFormControl.hasError('required')">Title is required</mat-error>
+                                  </mat-form-field>
+                                </div>
+                                <div style="flex: 1; display: flex; flex-direction: column;">
+                                  <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label style="color: black;">Order</mat-label>
+                                    <input matInput type="number" [formControl]="node2OrderFormControl" placeholder="Enter order" aria-label="Order" required>
+                                    <mat-error *ngIf="node2OrderFormControl.hasError('required')">Order is required</mat-error>
+                                    <mat-error *ngIf="node2OrderFormControl.hasError('min')">Order must be at least 1</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <!-- Row 2: Time Limit (radio), Duration (input, conditional) -->
+                              <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <div style="flex: 1; display: flex; flex-direction: column;">
+                                  <div class="input-label" style="margin-bottom: 4px; font-weight: 500;">Time Limit</div>
+                                  <mat-radio-group [formControl]="node2TimeLimitFormControl" aria-label="Time Limit" style="display: flex; flex-direction: row; gap: 16px;" required>
+                                    <mat-radio-button value="yes">Yes</mat-radio-button>
+                                    <mat-radio-button value="no">No</mat-radio-button>
+                                  </mat-radio-group>
+                                  <mat-error *ngIf="node2TimeLimitFormControl.hasError('required')">Time Limit is required</mat-error>
+                                </div>
+                                <div style="flex: 1; display: flex; flex-direction: column;" *ngIf="node2TimeLimitFormControl.value === 'yes'">
+                                  <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label style="color: black;">Duration</mat-label>
+                                    <input matInput type="number" [formControl]="node2DurationFormControl" placeholder="Enter duration (minutes)" required>
+                                    <mat-error *ngIf="node2DurationFormControl.hasError('required')">Duration is required</mat-error>
+                                    <mat-error *ngIf="node2DurationFormControl.hasError('min')">Duration must be at least 0</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <!-- Row 3: Level Exam Required (radio), Minimum Score Percentage (select, conditional) -->
+                              <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <div style="flex: 1; display: flex; flex-direction: column;">
+                                  <div class="input-label" style="margin-bottom: 4px; font-weight: 500;">Level Exam Required</div>
+                                  <mat-radio-group [formControl]="node2LevelExamFormControl" aria-label="Level Exam Required" style="display: flex; flex-direction: row; gap: 16px;" required>
+                                    <mat-radio-button value="yes">Yes</mat-radio-button>
+                                    <mat-radio-button value="no">No</mat-radio-button>
+                                  </mat-radio-group>
+                                  <mat-error *ngIf="node2LevelExamFormControl.hasError('required')">Level Exam Required is required</mat-error>
+                                </div>
+                                <div style="flex: 1; display: flex; flex-direction: column;" *ngIf="node2LevelExamFormControl.value === 'yes'">
+                                  <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label style="color: black;">Minimum Score Percentage</mat-label>
+                                    <mat-select [formControl]="node2MinScoreFormControl" aria-label="Minimum Score Percentage" required>
+                                      <mat-option value="100">100%</mat-option>
+                                      <mat-option value="90">90%</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="node2MinScoreFormControl.hasError('required')">Minimum Score Percentage is required</mat-error>
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <!-- Observable Elements (stacked) -->
+                              <div style="margin-bottom: 16px;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                  <mat-label style="color: black;">Observable Elements</mat-label>
+                                  <mat-select [formControl]="node2ObservableElementsFormControl" multiple aria-label="Observable Elements" required>
+                                    <!-- <mat-option value="element1">Element 1</mat-option>
+                                    <mat-option value="element2">Element 2</mat-option>
+                                    <mat-option value="element3">Element 3</mat-option> -->
+                                  </mat-select>
+                                  <mat-error *ngIf="node2ObservableElementsFormControl.hasError('required')">Observable Elements is required</mat-error>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading State -->
+<div class="ui active centered inline loader" *ngIf="isLoading"></div>
