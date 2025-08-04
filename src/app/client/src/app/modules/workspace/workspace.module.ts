@@ -31,6 +31,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { QuestionsetEditorLibraryModule } from '@project-sunbird/sunbird-questionset-editor';
+import { CompetencyFrameworkEditorComponent } from './components/competency-framework-editor/competency-framework-editor.component';
+import { CompetencyFrameworkTreeComponent } from './components/competency-framework-tree/competency-framework-tree.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -75,7 +77,9 @@ import { QuestionsetEditorLibraryModule } from '@project-sunbird/sunbird-questio
     NewCollectionEditorComponent,
     SkillMapComponent,
     SkillMapEditorComponent,
-    SkillMapTreeComponent
+    SkillMapTreeComponent,
+    CompetencyFrameworkEditorComponent,
+    CompetencyFrameworkTreeComponent
   ],
   providers: [WorkSpaceService, EditorService, BatchService, ReviewCommentsService, DateFilterXtimeAgoPipe]
 })

@@ -1,0 +1,14 @@
+<div #competencyFrameworkTree class="framework-tree"></div>
+
+<!-- Show Add Level button only at root level -->
+<div class="sb-fixed-with-whitebg pr-20 d-flex flex-jc-space-between" *ngIf="config && config.mode === 'edit' && visibility?.isRootNode">
+  <div class="d-flex action-buttons" style="padding: 0 30px;gap:10px">
+    <div class="sb-btn-cover">
+      <button (click)="onAddChild()"
+        class="sb-btn sb-btn-outline-primary sb-btn-normal sb-btn-radius p-0 b-none">
+        <i aria-hidden="true" class="icon plus"></i>
+        Add Level
+      </button>
+    </div>
+  </div>
+</div>

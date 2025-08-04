@@ -9,6 +9,7 @@ import {
   FlagConentplayerComponent, PublishedPopupComponent, RequestChangesPopupComponent, LimitedPublishedComponent,
   AllContentComponent, FlagReviewerComponent, CollaboratingOnComponent, AllTextbooksComponent, NewCollectionEditorComponent, SkillMapComponent, SkillMapEditorComponent } from './components';
 import { AuthGuard } from '../core/guard/auth-gard.service';
+import { CompetencyFrameworkEditorComponent } from './components/competency-framework-editor/competency-framework-editor.component';
 const telemetryEnv = 'workspace';
 const objectType = 'workspace';
 const routes: Routes = [
@@ -303,7 +304,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'competency-framework/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        path: 'competency-framework/:pageNumber', component: SkillMapComponent, 
         data: {
           telemetry: {
             env: telemetryEnv, pageid: 'workspace-content-skillmap', subtype: 'paginate', uri: 'workspace/content/competency-framework',
@@ -313,7 +314,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'competency-framework-reviewer/:pageNumber', component: SkillMapComponent, canActivate: [AuthGuard],
+        path: 'competency-framework-reviewer/:pageNumber', component: SkillMapComponent,
         data: {
           telemetry: {
             env: telemetryEnv, pageid: 'workspace-content-competency-framework-reviewer', subtype: 'paginate', uri: 'workspace/content/competency-framework-reviewer',
@@ -330,8 +331,19 @@ const routes: Routes = [
       telemetry: {
         env: telemetryEnv, pageid: 'workspace-content-skillmap-editor', uri: 'workspace/content/skillmap/edit',
         type: 'edit', mode: 'create', object: { type: objectType, ver: '1.0' }
-      }, roles: 'skillmapRole',
+      }, roles: 'competencyFrameworkRole',
       breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '/workspace/content/skillmap/1' }, { label: 'Skill Map Editor', url: '' }],
+      hideHeaderNFooter: true
+    }
+  },
+  {
+    path: 'content/competency-framework/edit/:contentId', component: CompetencyFrameworkEditorComponent,
+    data: {
+      telemetry: {
+        env: telemetryEnv, pageid: 'workspace-content-competency-framework-editor', uri: 'workspace/content/competency-framework/edit',
+        type: 'edit', mode: 'create', object: { type: objectType, ver: '1.0' }
+      }, roles: 'skillmapRole',
+      breadcrumbs: [{ label: 'Home', url: '/home' }, { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '/workspace/content/competency-framework/1' }, { label: 'Competency Framework Editor', url: '' }],
       hideHeaderNFooter: true
     }
   },
