@@ -2858,7 +2858,9 @@
                 "publish": "Publier",
                 "requestChanges": "Demander des modifications",
                 "startcreating": "Commencer à créer",
-                "login": "Se connecter"
+                "login": "Se connecter",
+                "openQuizEditor": "Ouvrir l'éditeur de quiz",
+                "backToCreateContent": "Retour à Créer du contenu"
             },
             "lbl": {
                 "name": "Nom",
@@ -2940,6 +2942,13 @@
                 "practiceassessment": "Évaluation pratique",
                 "practice": "Évaluation pratique",
                 "practicedescription": "Créez des évaluations pratiques pour les apprenants à l'aide des outils d'auteur intégrés",
+                "newQuiz": "Nouveau Quiz",
+                "newQuizDescription": "Créez des quiz interactifs avec des questions, du multimédia et des commentaires instantanés",
+                "quizEditorOpening": "Ouverture de l'éditeur de quiz",
+                "quizEditorOpeningDescription": "L'éditeur de quiz s'ouvrira dans une nouvelle fenêtre. Veuillez vous assurer que les popups sont activés pour ce site.",
+                "directionalSupport": "Support directionnel",
+                "directionalSupportDescription": "Cet éditeur de quiz prend en charge les directions de texte de gauche à droite (LTR) et de droite à gauche (RTL) pour la création de contenu multilingue.",
+                "openingQuizEditor": "Ouverture de l'éditeur de quiz...",
                 "contentCaps": "CONTENU",
                 "lastupdate": "Dernière mise à jour",
                 "statusCaps": "STATUT",

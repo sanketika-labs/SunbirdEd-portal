@@ -2859,7 +2859,9 @@
                 "publish": "نشر",
                 "requestChanges": "طلب التغييرات",
                 "startcreating": "ابدأ في الإنشاء",
-                "login": "تسجيل الدخول"
+                "login": "تسجيل الدخول",
+                "openQuizEditor": "فتح محرر الاختبار",
+                "backToCreateContent": "العودة إلى إنشاء المحتوى"
             },
             "lbl": {
                 "name": "الاسم",
@@ -2941,6 +2943,13 @@
                 "practiceassessment": "تقييم الممارسة",
                 "practice": "تقييم تدريبي",
                 "practicedescription": "إنشاء تقييمات تدريبية للمتعلمين باستخدام أدوات التأليف المدمجة",
+                "newQuiz": "اختبار جديد",
+                "newQuizDescription": "قم بإنشاء اختبارات تفاعلية مع الأسئلة والوسائط المتعددة والتعليقات الفورية",
+                "quizEditorOpening": "فتح محرر الاختبار",
+                "quizEditorOpeningDescription": "سيتم فتح محرر الاختبار في نافذة جديدة. يرجى التأكد من تمكين النوافذ المنبثقة لهذا الموقع.",
+                "directionalSupport": "الدعم الاتجاهي",
+                "directionalSupportDescription": "يدعم محرر الاختبار هذا اتجاهات النص من اليسار إلى اليمين (LTR) ومن اليمين إلى اليسار (RTL) لإنشاء محتوى متعدد اللغات.",
+                "openingQuizEditor": "فتح محرر الاختبار...",
                 "contentCaps": "محتوى",
                 "lastupdate": "التحديث الأخير",
                 "statusCaps": "حالة",

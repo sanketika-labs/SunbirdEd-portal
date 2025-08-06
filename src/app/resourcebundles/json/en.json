@@ -2859,7 +2859,9 @@
                 "publish": "Publish",
                 "requestChanges": "Request changes",
                 "startcreating": "Start creating",
-                "login": "Login"
+                "login": "Login",
+                "openQuizEditor": "Open Quiz Editor",
+                "backToCreateContent": "Back to Create Content"
             },
             "lbl": {
                 "name": "Name",
@@ -2941,6 +2943,13 @@
                 "practiceassessment": "PracticeAssessment",
                 "practice": "Practice Assessment",
                 "practicedescription": "Create practice assessments for learners using the in-built authoring tools",
+                "newQuiz": "New Quiz",
+                "newQuizDescription": "Create interactive quizzes with questions, multimedia, and instant feedback",
+                "quizEditorOpening": "Quiz Editor Opening",
+                "quizEditorOpeningDescription": "The quiz editor will open in a new window. Please ensure popups are enabled for this site.",
+                "directionalSupport": "Directional Support",
+                "directionalSupportDescription": "This quiz editor supports both left-to-right (LTR) and right-to-left (RTL) text directions for multilingual content creation.",
+                "openingQuizEditor": "Opening Quiz Editor...",
                 "contentCaps": "CONTENT",
                 "lastupdate": "Last update",
                 "statusCaps": "STATUS",

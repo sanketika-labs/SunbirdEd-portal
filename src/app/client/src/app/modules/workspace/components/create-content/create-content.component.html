@@ -130,6 +130,26 @@
         </div>
         <p class="workspaceinstuction">{{resourceService?.frmelmnts?.lbl?.practicedescription}}</p>
       </div>
+      <!-- New Quiz -->
+      <div class="three wide column" *ngIf="permissionService.permissionAvailable"
+        appPermission [permission]='quizRole'>
+        <div class="ui link card" (click)="createNewQuiz()" appTelemetryInteract
+          [telemetryInteractEdata]="{id:'createQuiz',type:'click',pageid:'create-quiz'}"
+          [telemetryInteractCdata]="[{ id: 'user:workspace:quiz:create', type: 'Feature' }, { id: 'SB-QUIZ-001', type: 'Task' }]"
+          [ngClass]="{'loading': isQuizLoading}">
+          <div class="content">
+            <div class="textcontent" *ngIf="!isQuizLoading">
+              <i class="fa fa-list-check icon"></i>
+              <span class="my-text ml-12">{{resourceService?.frmelmnts?.lbl?.newQuiz}}</span>
+            </div>
+            <div class="textcontent" *ngIf="isQuizLoading">
+              <i class="spinner loading icon"></i>
+              <span class="my-text ml-12">Loading Quiz Editor...</span>
+            </div>
+          </div>
+        </div>
+        <p class="workspaceinstuction">{{resourceService?.frmelmnts?.lbl?.newQuizDescription}}</p>
+      </div>
     </div>
   </div>
   <!-- <div class="twelve wide column ">
