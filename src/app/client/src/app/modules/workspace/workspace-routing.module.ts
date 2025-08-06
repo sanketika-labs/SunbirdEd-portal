@@ -7,11 +7,22 @@ import {
   BatchListComponent, BatchPageSectionComponent, UpdateBatchComponent,
   UpforreviewContentplayerComponent, ReviewsubmissionsContentplayerComponent,
   FlagConentplayerComponent, PublishedPopupComponent, RequestChangesPopupComponent, LimitedPublishedComponent,
-  AllContentComponent, FlagReviewerComponent, CollaboratingOnComponent, AllTextbooksComponent, NewCollectionEditorComponent } from './components';
+  AllContentComponent, FlagReviewerComponent, CollaboratingOnComponent, AllTextbooksComponent, NewCollectionEditorComponent, QuizEditorComponent } from './components';
 import { AuthGuard } from '../core/guard/auth-gard.service';
 const telemetryEnv = 'workspace';
 const objectType = 'workspace';
 const routes: Routes = [
+  {
+    path: 'edit/new-quiz', component: QuizEditorComponent, canActivate: [AuthGuard],
+    data: { 
+      roles: 'workspace',
+      telemetry: {
+        env: telemetryEnv, pageid: 'quiz-editor-fullscreen', uri: '/workspace/edit/new-quiz',
+        type: 'view', mode: 'create', object: { type: objectType, ver: '1.0' }
+      },
+      hideHeaderNFooter: true
+    }
+  },
   {
     path: 'content', component: WorkspaceComponent, canActivate: [AuthGuard], data: { roles: 'workspace' },
     children: [
@@ -106,6 +117,16 @@ const routes: Routes = [
             }
           },
           {
+            path: 'quiz', component: QuizEditorComponent,
+            data: {
+              telemetry: {
+                env: telemetryEnv, pageid: 'workspace-create-quiz', subtype: 'paginate', uri: '/workspace/content/create/quiz',
+                type: 'view', mode: 'create', object: { type: objectType, ver: '1.0' }
+              }, breadcrumbs: [{ label: 'Home', url: '/home' },
+              { label: 'Profile', url: '/profile' }, { label: 'My Workspace', url: '' }]
+            }
+          },
+          {
             path: 'questionset', component: DataDrivenComponent,
             data: {
               telemetry: {
@@ -150,6 +171,22 @@ const routes: Routes = [
       {
         path: 'edit/generic/:contentId/:state/:framework', component: GenericEditorComponent,
         canActivate: [AuthGuard], data: { roles: 'workspace' }
+      },
+      {
+        path: 'quiz-editor', component: QuizEditorComponent,
+        canActivate: [AuthGuard], 
+        data: { 
+          roles: 'workspace',
+          telemetry: {
+            env: telemetryEnv, pageid: 'workspace-quiz-editor', uri: '/workspace/content/quiz-editor',
+            type: 'view', mode: 'create', object: { type: objectType, ver: '1.0' }
+          }, 
+          breadcrumbs: [
+            { label: 'Home', url: '/home' }, 
+            { label: 'Profile', url: '/profile' }, 
+            { label: 'My Workspace', url: '/workspace/content/create' }
+          ]
+        }
       },
       {
         path: 'draft/:pageNumber', component: DraftComponent, canActivate: [AuthGuard],

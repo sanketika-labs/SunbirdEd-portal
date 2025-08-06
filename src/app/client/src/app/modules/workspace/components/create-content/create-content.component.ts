@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ResourceService, ConfigService, NavigationHelperService } from '@sunbird/shared';
 import { FrameworkService, PermissionService, UserService } from '@sunbird/core';
@@ -41,6 +41,10 @@ export class CreateContentComponent implements OnInit, AfterViewInit {
    */
   assessmentRole: Array<string>;
   /**
+   * quiz access role
+   */
+  quizRole: Array<string>;
+  /**
    * To call resource service which helps to use language constant
    */
   public resourceService: ResourceService;
@@ -71,6 +75,7 @@ export class CreateContentComponent implements OnInit, AfterViewInit {
  */
 
   public categoriesConfig: any = []
+  public isQuizLoading: boolean = false;
   enableWorkspaceData: any = {
     request: {
       formType: "workspace",
@@ -82,7 +87,7 @@ export class CreateContentComponent implements OnInit, AfterViewInit {
     frameworkService: FrameworkService, permissionService: PermissionService,
     private activatedRoute: ActivatedRoute, public userService: UserService,
     public navigationhelperService: NavigationHelperService,
-    public workSpaceService: WorkSpaceService) {
+    public workSpaceService: WorkSpaceService, private router: Router) {
     this.resourceService = resourceService;
     this.frameworkService = frameworkService;
     this.permissionService = permissionService;
@@ -97,6 +102,7 @@ export class CreateContentComponent implements OnInit, AfterViewInit {
     this.lessonplanRole = this.configService.rolesConfig.workSpaceRole.lessonplanRole;
     this.contentUploadRole = this.configService.rolesConfig.workSpaceRole.contentUploadRole;
     this.assessmentRole = this.configService.rolesConfig.workSpaceRole.assessmentRole;
+    this.quizRole = this.configService.rolesConfig.workSpaceRole.quizRole;
     this.courseRole = this.configService.rolesConfig.workSpaceRole.courseRole;
     this.workSpaceService.questionSetEnabled$.subscribe(
       (response: any) => {
@@ -130,5 +136,19 @@ export class CreateContentComponent implements OnInit, AfterViewInit {
     if(this.categoriesConfig.length > 0){
       return this.categoriesConfig.some( cat => cat.code == category && cat.visible == true);
     }
+  }
+
+  createNewQuiz() {
+    // Show loading state
+    this.isQuizLoading = true;
+    
+    // Navigate to full-screen quiz editor route (same pattern as course editor)
+    setTimeout(() => {
+      this.router.navigate(['/workspace/edit/new-quiz'], {
+        queryParams: {
+        }
+      });
+      this.isQuizLoading = false;
+    }, 1000); // 1 second delay to show loader
   }
 }

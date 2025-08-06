@@ -1,0 +1,357 @@
+// Quiz Editor Styles (matching skill map editor design)
+
+.quiz-editor {
+    height: 100vh; // Set fixed height
+    overflow: hidden; // Prevent any overflow on main container
+
+    .sb-disabled {
+        background: var(--gray-0);
+        border: .0625rem solid var(--gray-0);
+        opacity: .45;
+        pointer-events: none;
+    }
+
+    .hover-none {
+        &:hover {
+            background: none !important;
+        }
+    }
+
+    .sb-bg-lightBlue {
+        background: var(--primary-0) !important;
+    }
+
+    .bb-1 {
+        border-bottom: 1px solid #d8d8d8;
+    }
+
+    .eight.bg-white {
+        border-left: solid 1px var(--gray-100);
+
+        html[dir="rtl"] & {
+            border-right: solid 1px var(--gray-100);
+            border-left: none;
+        }
+    }
+
+    // Angular Material Form Styling (matching skill map editor)
+    .quiz-meta-form {
+        padding: 20px;
+
+        .quiz-form {
+            font-family: 'Times New Roman', sans-serif !important;
+
+            mat-form-field {
+                font-family: 'Times New Roman', sans-serif !important;
+
+                // Remove red outline on focus/typing
+                .mat-form-field-outline-thick {
+                    color: rgba(0, 0, 0, 0.12) !important;
+                }
+
+                // Enhanced error styling for better visibility
+                &.mat-form-field-invalid {
+                    .mat-form-field-outline-thick {
+                        color: rgba(0, 0, 0, 0.12) !important;
+                    }
+                }
+
+                mat-error {
+                    font-size: 12px;
+                    color: #f44336;
+                    margin-top: 4px;
+                }
+
+                .mat-form-field-outline-start,
+                .mat-form-field-outline-gap,
+                .mat-form-field-outline-end {
+                    border-color: rgba(0, 0, 0, 0.12) !important;
+                }
+
+                // Ensure labels are black and positioned outside
+                mat-label {
+                    font-family: 'Times New Roman', sans-serif !important;
+                    color: black !important;
+                }
+
+                // Remove red border from inputs when focused or invalid
+                input,
+                textarea {
+                    font-family: 'Times New Roman', sans-serif !important;
+                    border: none !important;
+                    outline: none !important;
+
+                    &:focus {
+                        border: none !important;
+                        outline: none !important;
+                        box-shadow: none !important;
+                    }
+
+                    &.ng-invalid {
+                        border: none !important;
+                        box-shadow: none !important;
+                    }
+                }
+
+                // Error and hint styling
+                mat-error,
+                mat-hint {
+                    font-family: 'Times New Roman', sans-serif !important;
+                }
+
+                // Override Angular Material's focus color
+                &.mat-focused {
+                    .mat-form-field-outline-thick {
+                        color: rgba(0, 0, 0, 0.12) !important;
+                    }
+                }
+
+                // Override error state outline
+                &.mat-form-field-invalid {
+                    .mat-form-field-outline-thick {
+                        color: rgba(0, 0, 0, 0.12) !important;
+                    }
+                }
+
+                // Additional override for any red coloring
+                .mat-form-field-outline {
+                    color: rgba(0, 0, 0, 0.12) !important;
+                }
+
+                // Remove red from input field itself
+                .mat-input-element {
+                    caret-color: black !important;
+
+                    &:focus {
+                        caret-color: black !important;
+                    }
+                }
+
+                // Override any mat-input-error class
+                .mat-input-error {
+                    border-color: rgba(0, 0, 0, 0.12) !important;
+                    box-shadow: none !important;
+                }
+
+                // Specific styling for filled appearance
+                &.mat-form-field-appearance-fill {
+                    .mat-form-field-underline {
+                        background-color: rgba(0, 0, 0, 0.12) !important;
+                    }
+
+                    &.mat-focused .mat-form-field-underline {
+                        background-color: rgba(0, 0, 0, 0.12) !important;
+                    }
+
+                    &.mat-form-field-invalid .mat-form-field-underline {
+                        background-color: rgba(0, 0, 0, 0.12) !important;
+                    }
+                }
+            }
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .half-width {
+            width: calc(50% - 5px);
+        }
+
+        .two-column-fields {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+
+        .mr-10 {
+            margin-right: 10px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        mat-form-field {
+            display: block;
+
+            .mat-form-field-wrapper {
+                padding-bottom: 1.25em;
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-top: 16px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .required {
+            color: #f44336;
+        }
+    }
+
+    // Grid and layout adjustments (matching skill map editor)
+    .ui.twelve.column.grid {
+        height: calc(100vh - 120px); // Subtract approximate header heights to prevent overflow
+
+        .column {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .eight.wide.column {
+            overflow-y: hidden; // Remove scroll from form area
+
+            &.w-73 {
+                width: 73% !important;
+            }
+
+            &.pl-40 {
+                padding-left: 40px !important;
+            }
+
+            &.mb-10 {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    // Global helper classes matching skill map editor
+    .p-50 {
+        padding: 50px;
+    }
+
+    .overflow-y {
+        overflow-y: auto;
+    }
+
+    .mb-40 {
+        margin-bottom: 40px;
+    }
+
+    .h-100vh {
+        height: calc(100vh - 120px); // Subtract header heights to prevent page overflow
+        overflow-y: auto; // Allow scrolling within the main content area
+    }
+
+    .sb-questionset-scroll {
+        max-height: calc(100vh - 200px);
+        overflow-y: hidden;
+    }
+
+    // Responsive adjustments
+    @media (max-width: 768px) {
+        .ui.twelve.column.grid {
+            .eight.wide.column {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+.observable-elements-content {
+    padding: 20px !important;
+
+    .selected-preview {
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 16px;
+        background: #f9f9f9;
+
+        h4 {
+            margin: 0 0 12px 0;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .selected-items {
+            color: #666;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// Utility classes matching skill map editor exactly
+.py-15 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.py-20 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.pl-20 {
+    padding-left: 20px !important;
+}
+
+.pl-40 {
+    padding-left: 40px !important;
+}
+
+.p-200 {
+    padding: 10px 200px !important;
+}
+
+.pr-40 {
+    padding-right: 40px !important;
+}
+
+.mr-10 {
+    margin-right: 10px !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-ai-center {
+    align-items: center !important;
+}
+
+.flex-jc-space-between {
+    justify-content: space-between !important;
+}
+
+.sb-color-white {
+    color: white !important;
+}
+
+.sb-bg-white {
+    background: white !important;
+}
+
+.fs-0-92 {
+    font-size: 0.92rem !important;
+}
+
+.font-weight-bold {
+    font-weight: bold !important;
+}
+
+.practical-header__title {
+    font-size: 1.2rem !important;
+}
+
+.sb-modal-content {
+    padding: 0 !important;
+}
+
+.sb-btn-dark-green{
+    background: green !important;
+    color: white !important;
+    border: solid 1px green!important;
+}
