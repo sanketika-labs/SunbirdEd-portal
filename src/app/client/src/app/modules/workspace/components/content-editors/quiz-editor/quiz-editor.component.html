@@ -3,7 +3,7 @@
     <div class="sb-bg-color-primary">
         <div class="ui container py-15">
             <div class="d-flex flex-ai-center sb-color-white">
-                <button style="margin: 0 1rem;" class="sb-btn sb-btn-primary sb-btn-xs back-btn px-0 hover-none fs-0-92 font-weight-bold"
+                <button class="back-button sb-btn sb-btn-primary sb-btn-xs back-btn px-0 hover-none fs-0-92 font-weight-bold"
                     (click)="goBack()" aria-label="back">
                     <i class="arrow left icon" aria-hidden="true"></i> {{resourceService?.frmelmnts?.btn?.back}}
                 </button>
@@ -47,23 +47,23 @@
                     <!-- Meta Form for Quiz Details - Always Visible -->
                     <div class="quiz-meta-form p-200">       
                         <!-- Angular Material Form -->
-                        <form class="quiz-form" style="font-family: 'Times New Roman', sans-serif !important;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); background: #ffffff; border-radius: 8px; padding: 2rem;">
+                        <form class="quiz-form quiz-form-styled">
                             <!-- Title and Type in same row (50% each) -->
-                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.title || 'Title'}}</mat-label>
+                            <div class="form-row-flex">
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.title || 'Title'}}</mat-label>
                                     <input matInput 
                                            [formControl]="titleFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterTitle || 'Enter title'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="titleFormControl.hasError('required') && (titleFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.titleIsRequired || 'Title is required'}}</mat-error>
                                     <mat-error *ngIf="titleFormControl.hasError('leadingTrailingSpaces') && !titleFormControl.hasError('required') && (titleFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.noLeadingTrailingSpaces || 'Title cannot have leading or trailing spaces'}}</mat-error>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.type || 'Type'}}</mat-label>
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.type || 'Type'}}</mat-label>
                                     <mat-select [formControl]="typeFormControl" 
-                                               style="font-family: 'Times New Roman', sans-serif !important;">
+                                               class="times-new-roman-font">
                                         <mat-option value="section">{{'SECTION'}}</mat-option>
                                         <mat-option value="module">{{'MODULE'}}</mat-option>
                                         <mat-option value="course">{{'COURSE'}}</mat-option>
@@ -75,83 +75,82 @@
                             </div>
                             
                             <!-- Attempts and No of questions in same line (50% each) -->
-                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.attempts || 'Attempts'}}</mat-label>
+                            <div class="form-row-flex">
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.attempts || 'Attempts'}}</mat-label>
                                     <input matInput 
                                            type="number"
                                            [formControl]="attemptsFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterAttempts || 'Enter number of attempts'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="attemptsFormControl.hasError('required') && (attemptsFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.attemptsRequired || 'Attempts is required'}}</mat-error>
                                     <mat-error *ngIf="attemptsFormControl.hasError('min') && !attemptsFormControl.hasError('required') && (attemptsFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.attemptsMin || 'Must be at least 1'}}</mat-error>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.numberOfQuestions || 'No of questions'}}</mat-label>
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.numberOfQuestions || 'No of questions'}}</mat-label>
                                     <input matInput 
                                            type="number"
                                            [formControl]="numberOfQuestionsFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterNumberOfQuestions || 'Enter number of questions'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="numberOfQuestionsFormControl.hasError('required') && (numberOfQuestionsFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.numberOfQuestionsRequired || 'Number of questions is required'}}</mat-error>
                                     <mat-error *ngIf="numberOfQuestionsFormControl.hasError('min') && !numberOfQuestionsFormControl.hasError('required') && (numberOfQuestionsFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.numberOfQuestionsMin || 'Must have at least 1 question'}}</mat-error>
                                 </mat-form-field>
                             </div>
-
                             <!-- Divider Line -->
-                            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+                            <hr class="form-divider">
 
                             <!-- Difficulty Section Title -->
-                            <div style="margin-bottom: 16px;">
-                                <h3 style="margin: 0 0 16px 0; color: #333; font-size: 1.1rem; font-weight: 600;">
+                            <div class="section-title-container">
+                                <h3 class="section-title">
                                     {{resourceService?.frmelmnts?.lbl?.difficulty || 'Difficulty'}}
                                 </h3>
                             </div>
                             
                             <!-- Easy, Medium, Hard inputs in one line (similar to skill map's 3-column layout) -->
-                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.easy || 'Easy'}}</mat-label>
+                            <div class="form-row-flex">
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.easy || 'Easy'}}</mat-label>
                                     <input matInput 
                                            type="number"
                                            [formControl]="easyFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterEasy || 'Enter easy questions count'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="easyFormControl.hasError('required') && (easyFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.easyRequired || 'Easy questions count is required'}}</mat-error>
                                     <mat-error *ngIf="easyFormControl.hasError('min') && !easyFormControl.hasError('required') && (easyFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.easyMin || 'Must be 0 or greater'}}</mat-error>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{'Medium'}}</mat-label>
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{'Medium'}}</mat-label>
                                     <input matInput 
                                            type="number"
                                            [formControl]="mediumFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterMedium || 'Enter medium questions count'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="mediumFormControl.hasError('required') && (mediumFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.mediumRequired || 'Medium questions count is required'}}</mat-error>
                                     <mat-error *ngIf="mediumFormControl.hasError('min') && !mediumFormControl.hasError('required') && (mediumFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.mediumMin || 'Must be 0 or greater'}}</mat-error>
                                 </mat-form-field>
                                 
-                                <mat-form-field appearance="outline" style="flex: 1;">
-                                    <mat-label style="color: black;">{{resourceService?.frmelmnts?.lbl?.hard || 'Hard'}}</mat-label>
+                                <mat-form-field appearance="outline" class="form-field-flex">
+                                    <mat-label class="form-label-black">{{resourceService?.frmelmnts?.lbl?.hard || 'Hard'}}</mat-label>
                                     <input matInput 
                                            type="number"
                                            [formControl]="hardFormControl"
                                            placeholder="{{resourceService?.frmelmnts?.lbl?.enterHard || 'Enter hard questions count'}}"
-                                           style="font-family: 'Times New Roman', sans-serif !important;">
+                                           class="times-new-roman-font">
                                     <mat-error *ngIf="hardFormControl.hasError('required') && (hardFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.hardRequired || 'Hard questions count is required'}}</mat-error>
                                     <mat-error *ngIf="hardFormControl.hasError('min') && !hardFormControl.hasError('required') && (hardFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.hardMin || 'Must be 0 or greater'}}</mat-error>
                                 </mat-form-field>
                             </div>
 
                             <!-- Question Distribution Summary -->
-                            <div style="margin-bottom: 16px; padding: 12px; background: #f5f5f5; border-radius: 4px; border-left: 4px solid #2196f3;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-weight: 500; color: #666;">
+                            <div class="question-distribution-summary">
+                                <div class="distribution-header">
+                                    <span class="distribution-label">
                                         {{resourceService?.frmelmnts?.lbl?.questionDistribution || 'Question Distribution'}}:
                                     </span>
-                                    <span style="font-weight: 600;" 
+                                    <span class="distribution-count" 
                                           [ngStyle]="{
                                             'color': getCurrentQuestionTotal() === getTotalQuestions() ? '#4caf50' : '#f44336'
                                           }">
@@ -159,25 +158,24 @@
                                     </span>
                                 </div>
                                 <div *ngIf="getCurrentQuestionTotal() !== getTotalQuestions()" 
-                                     style="margin-top: 8px; color: #f44336; font-size: 0.9rem;">
+                                     class="distribution-error">
                                     {{resourceService?.frmelmnts?.lbl?.distributionMismatch || 'The sum of difficulty levels must equal the total number of questions'}}
                                 </div>
                             </div>
 
                             <!-- Divider Line -->
-                            <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+                            <hr class="form-divider">
 
                             <!-- Observable Elements Section -->
-                            <div style="margin-bottom: 16px;">
+                            <div class="observable-elements-section">
                                 <!-- Observable Elements Title with Select Button -->
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                                    <h3 style="margin: 0; color: #333; font-size: 1.1rem; font-weight: 600;">
+                                <div class="observable-elements-header">
+                                    <h3 class="section-title">
                                         {{resourceService?.frmelmnts?.lbl?.observableElements || 'Observable Elements'}}
                                     </h3>
                                     <button type="button" 
-                                            class="sb-btn sb-btn-normal sb-btn-dark-green font-weight-bold"
-                                            (click)="openObservableElementsModal()"
-                                            style="padding: 8px 16px; font-size: 0.9rem;">
+                                            class="sb-btn sb-btn-normal sb-btn-dark-green font-weight-bold select-button"
+                                            (click)="openObservableElementsModal()">
                                         <i class="plus square icon"></i>
                                         {{resourceService?.frmelmnts?.btn?.select || 'Select'}}
                                     </button>
@@ -185,25 +183,23 @@
                                 
                                 <!-- Display selected observable elements (if any) -->
                                 <div *ngIf="selectedObservableElements.length > 0" 
-                                     style="border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; background: #f9f9f9;">
-                                    <div style="font-weight: 500; margin-bottom: 8px; color: #666;">
+                                     class="selected-elements-container">
+                                    <div class="selected-elements-label">
                                         {{resourceService?.frmelmnts?.lbl?.selectedElements || 'Selected Elements'}} ({{selectedObservableElements.length}})
                                     </div>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    <div class="selected-elements-chips">
                                         <span *ngFor="let element of selectedObservableElements" 
-                                              class="ui label small"
-                                              style="background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb;">
+                                              class="ui label small element-chip">
                                             {{element.name}}
-                                            <i class="delete icon" 
-                                               (click)="removeObservableElement(element)"
-                                               style="cursor: pointer; margin-left: 8px;"></i>
+                                            <i class="delete icon element-delete" 
+                                               (click)="removeObservableElement(element)"></i>
                                         </span>
                                     </div>
                                 </div>
                                 
                                 <!-- Placeholder when no elements selected -->
                                 <div *ngIf="selectedObservableElements.length === 0" 
-                                     style="border: 1px dashed #ccc; border-radius: 4px; padding: 20px; text-align: center; color: #999;">
+                                     class="no-elements-placeholder">
                                     {{resourceService?.frmelmnts?.lbl?.noElementsSelected || 'No observable elements selected. Click "Select" to choose elements.'}}
                                 </div>
                             </div>
