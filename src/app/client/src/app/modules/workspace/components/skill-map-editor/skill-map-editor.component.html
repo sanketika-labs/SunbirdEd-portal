@@ -1,0 +1,157 @@
+<div class="skill-map-editor" *ngIf="!isLoading">
+    <!-- Blue Header -->
+    <div class="sb-bg-color-primary">
+        <div class="ui container py-15">
+            <div class="d-flex flex-ai-center sb-color-white">
+                <button style="margin: 0 1rem;"
+                    class="sb-btn sb-btn-primary sb-btn-xs back-btn px-0 hover-none fs-0-92 font-weight-bold"
+                    (click)="goBack()" aria-label="back">
+                    <i class="arrow left icon" aria-hidden="true"></i> {{resourceService?.frmelmnts?.btn?.back}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Header -->
+    <div class="sb-bg-lightBlue bb-1">
+        <div class="d-flex flex-jc-space-between flex-ai-center py-20 ui container">
+            <div class="d-flex flex-direction-column flex-ai-start">
+                <div class="practical-header__title font-weight-bold pl-20 fs-0-92" tabindex="0">
+                    {{ skillMapName || skillMapData?.name }}
+                </div>
+                <i *ngIf="isEditMode" class="icon edit pl-20 mt-5"
+                    style="cursor: pointer; color: var(--primary-400); font-size: 12px;" tabindex="0" role="button"
+                    (click)="openEditFrameworkModal()" (keyup.enter)="openEditFrameworkModal()"
+                    (keyup.space)="openEditFrameworkModal()"
+                    [attr.aria-label]="resourceService?.frmelmnts?.lbl?.editFramework">
+                </i>
+            </div>
+            <div class="d-flex flex-ai-center">
+                <!-- Edit Mode Buttons -->
+                <button *ngIf="isEditMode" class="sb-btn sb-btn-normal sb-btn-outline-primary mr-10"
+                    [disabled]="!canSaveAsDraft" [ngClass]="{'sb-disabled': !canSaveAsDraft}" (click)="saveDraft()">
+                    <i class="icon save" aria-hidden="true"></i>
+                    {{resourceService?.frmelmnts?.lbl?.saveAsDraftBtn}}
+                </button>
+                <button *ngIf="isEditMode" class="sb-btn sb-btn-normal sb-btn-primary mr-10"
+                    (click)="previewSkillMap()">
+                    Send for Review
+                </button>
+
+                <!-- Review Mode Buttons (for reviewers) -->
+                <button *ngIf="isReviewMode && isSkillMapReviewer" class="sb-btn sb-btn-normal sb-btn-success mr-10"
+                    (click)="publishSkillMap()">
+                    <i class="icon checkmark" aria-hidden="true"></i>
+                    Publish
+                </button>
+                <button *ngIf="isReviewMode && isSkillMapReviewer"
+                    class="sb-btn sb-btn-normal sb-btn-outline-danger mr-10" (click)="rejectSkillMap()">
+                    <i class="icon times" aria-hidden="true"></i>
+                    Reject
+                </button>
+
+                <!-- View Mode: No action buttons shown -->
+
+                <!-- View Mode: No action buttons shown -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area with Collection Editor Layout -->
+    <div class="h-100vh sb-bg-white">
+        <div class="ui">
+            <div class="ui twelve column grid m-0">
+                <!-- Tree Navigation Panel -->
+                <div class="three wide column p-0 overflow-y mb-10 h-100vh mt-10">
+                    <div
+                        class="skill-map-tree-container sb-collectionTree-fancyTree sb-collectionTree-fancyTreelist sb-questionset-scroll">
+                        <!-- Dynamic Skill Map Tree Component -->
+                        <app-skill-map-tree [skillMapData]="skillMapData" [labelConfig]="labelConfig"
+                            [config]="{ mode: mode, maxDepth: 4, objectType: 'SkillMap' }"
+                            (treeEventEmitter)="onTreeEvent($event)">
+                        </app-skill-map-tree>
+                    </div>
+                </div>
+
+                <!-- Right Form Panel (similar to meta-form) -->
+                <div class="eight wide column bg-white pl-40 mb-10 w-73">
+                    <!-- Meta Form for Node Details - Always Visible -->
+                    <div class="skill-map-meta-form">
+                        <!-- Angular Material Form -->
+                        <form class="skill-map-form" style="font-family: 'Times New Roman', sans-serif !important;">
+                            <!-- Name and Code in same row (50% each) -->
+                            <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                                <mat-form-field appearance="outline" style="flex: 1;">
+                                    <mat-label
+                                        style="color: black;">{{resourceService?.frmelmnts?.lbl?.skillMapName}}</mat-label>
+                                    <input matInput [formControl]="nameFormControl"
+                                        [readonly]="isViewMode || isReviewMode"
+                                        placeholder="{{resourceService?.frmelmnts?.lbl?.enterNodeName}}"
+                                        style="font-family: 'Times New Roman', sans-serif !important;">
+                                    <mat-error
+                                        *ngIf="nameFormControl.hasError('required') && (nameFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.nameIsRequired}}</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill" style="flex: 1;">
+                                    <mat-label
+                                        style="color: black;">{{resourceService?.frmelmnts?.lbl?.skillMapCode}}</mat-label>
+                                    <input matInput [formControl]="codeFormControl"
+                                        [readonly]="isViewMode || isReviewMode"
+                                        placeholder="{{resourceService?.frmelmnts?.lbl?.enterUniqueCode}}"
+                                        style="font-family: 'Times New Roman', sans-serif !important;">
+                                    <mat-error
+                                        *ngIf="codeFormControl.hasError('required') && (codeFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.codeIsRequired}}</mat-error>
+                                    <mat-error
+                                        *ngIf="codeFormControl.hasError('invalidCode') && !codeFormControl.hasError('required') && (codeFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.codeInvalidFormat}}</mat-error>
+                                    <mat-error
+                                        *ngIf="codeFormControl.hasError('duplicateCode') && !codeFormControl.hasError('required') && !codeFormControl.hasError('invalidCode') && (codeFormControl.touched || showValidationErrors)">{{resourceService?.frmelmnts?.lbl?.codeNotUnique}}</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Framework Modal -->
+<sui-modal *ngIf="showEditFrameworkModal" [mustScroll]="true" [isClosable]="false" class="sb-modal" size="small"
+    #editFrameworkModal>
+    <div class="sb-modal-header">
+        {{resourceService?.frmelmnts?.lbl?.editFramework || 'Edit Framework'}}
+    </div>
+    <div class="sb-modal-content">
+        <div class="sb-field-group">
+            <label>{{resourceService?.frmelmnts?.lbl?.name || 'Name'}} <span class="sb-color-error">*</span></label>
+            <input type="text" class="sb-form-control"
+                placeholder="{{resourceService?.frmelmnts?.lbl?.enterFrameworkName || 'Enter framework name'}}"
+                [(ngModel)]="editFrameworkForm.name" [class.sb-form-error]="hasEditNameError"
+                (blur)="validateEditForm()" maxlength="120">
+            <div *ngIf="hasEditNameError" class="sb-field-error">
+                {{resourceService?.frmelmnts?.lbl?.nameIsRequired || 'Name is required'}}
+            </div>
+        </div>
+
+        <div class="sb-field-group">
+            <label>{{resourceService?.frmelmnts?.lbl?.description || 'Description'}}</label>
+            <textarea class="sb-form-control" rows="3"
+                placeholder="{{resourceService?.frmelmnts?.lbl?.enterFrameworkDescription || 'Enter framework description'}}"
+                [(ngModel)]="editFrameworkForm.description" maxlength="256"></textarea>
+        </div>
+    </div>
+    <div class="sb-modal-actions">
+        <button type="button" class="sb-btn sb-btn-normal sb-btn-outline-primary" (click)="closeEditFrameworkModal()">
+            {{resourceService?.frmelmnts?.btn?.cancel || 'Cancel'}}
+        </button>
+        <button type="button" class="sb-btn sb-btn-normal sb-btn-primary ml-10"
+            [disabled]="isUpdatingFramework || hasEditNameError || !editFrameworkForm.name?.trim()"
+            (click)="updateFramework()">
+            <i *ngIf="isUpdatingFramework" class="icon notched circle loading" aria-hidden="true"></i>
+            {{resourceService?.frmelmnts?.btn?.update || 'Update'}}
+        </button>
+    </div>
+</sui-modal>
+
+<!-- Loading State -->
+<div class="ui active centered inline loader" *ngIf="isLoading"></div>
